@@ -28,10 +28,12 @@ test_data = pd.read_csv('data/test.csv')
 X_test = vectorizer.transform(clean(test_data))
 y_test = clf.predict(X_test)
 
-results_df = pd.DataFrame(y_test)
-print(results_df.describe())
+results_df = pd.DataFrame(y_test, columns = ['target'])
 
-results_df.to_csv('results/results.csv')
+#Results formatted for Kaggle submission:
+kaggle_submit = pd.concat([test_data['id'], results_df], axis = 1)
+kaggle_submit.to_csv('results/kaggle_submit.csv',index=False)
 
+#Results formatted for human reading
 results = pd.concat([test_data['text'], results_df], axis = 1)
 results.to_csv('results/check_this.csv')
