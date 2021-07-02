@@ -7,6 +7,7 @@ import sys
 import numpy as np
 
 
+
 vectorizer = TfidfVectorizer()
 
 tweet_data = pd.read_csv('data/train.csv')
